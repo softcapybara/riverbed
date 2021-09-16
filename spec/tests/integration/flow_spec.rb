@@ -7,7 +7,10 @@ RSpec.describe "Flow" do
   end
 
   it "accepts options" do
-    expect(Flow1.run(2, options: { logger: nil })).to eq(17)
+    expect(EmptyFlow.run(nil, logger: nil)).to eq(nil)
+    expect(Flow1.run(2, logger: nil)).to eq(17)
+    expect(Flow5.run(nil, logger: nil)).to eq(4)
+    expect(Flow5.run(4, logger: nil)).to eq(6)
   end
 
   it "can skip steps", :aggregate_failures do

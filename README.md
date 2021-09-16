@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-### Min example:
+### Min working example:
 ```ruby
 require "riverbed"
 
@@ -73,7 +73,9 @@ class Flow2 < Riverbed::Flow
 end
 
 input = "Hello"
-result = Flow2.run(input, options: {}) # can set `options: { logger: nil }` to skip step execution time logging
+result = Flow2.run(input)
+# Accepts second parameter is for options: `{ logger: nil }` to skip step execution time logging
+# Flow2.run(input, { logger: nil }) would skip logging
 
 puts "Final result: #{result}"
 ```

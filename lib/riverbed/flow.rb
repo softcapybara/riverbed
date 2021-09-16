@@ -8,7 +8,7 @@ module Riverbed
       @data = options.fetch(:data_object, Riverbed::Data.new(input))
     end
 
-    def self.run(input = nil, options: {})
+    def self.run(input = nil, options = {})
       new(input, options).run
     end
 
