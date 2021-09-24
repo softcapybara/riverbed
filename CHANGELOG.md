@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.2.0] - 2021-09-24
+- Add log_id option to flow
+```ruby
+Flow.run(nil, { log_id: "abc_my_session_id" })
+```
+
 - Change the way in which flow accepts parameters. Now flow options are second parameter.
 Old way, no longer accepted:
 ```ruby

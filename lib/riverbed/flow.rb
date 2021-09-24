@@ -4,6 +4,7 @@ module Riverbed
   class Flow
     def initialize(input, options)
       @logger = options.fetch(:logger, Logger.new($stdout))
+      @log_id = options.fetch(:log_id, generate_log_id)
 
       @data = options.fetch(:data_object, Riverbed::Data.new(input))
     end
@@ -21,6 +22,8 @@ module Riverbed
     end
 
     def run
+      log_flow_start
+
       begin
         run_steps(steps)
       rescue StandardError => e
@@ -29,6 +32,7 @@ module Riverbed
       end
 
       run_steps(always)
+      log_flow_end
 
       data.last_result
     end
@@ -57,8 +61,16 @@ module Riverbed
       logger&.info("#{log_id} Step #{step_name} executed in #{((end_time - start_time) * 1000).round(2)} ms")
     end
 
-    def log_id
-      @log_id ||= SecureRandom.urlsafe_base64(8)
+    def generate_log_id
+      SecureRandom.urlsafe_base64(8)
+    end
+
+    def log_flow_start
+      logger&.info("#{log_id} Starting flow #{self.class}")
+    end
+
+    def log_flow_end
+      logger&.info("#{log_id} Ending flow #{self.class}")
     end
 
     def on_error(error)
