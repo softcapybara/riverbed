@@ -39,7 +39,7 @@ module Riverbed
 
     private
 
-    attr_accessor :logger, :data
+    attr_accessor :logger, :data, :log_id
 
     def run_steps(steps)
       steps.each do |step_class|
